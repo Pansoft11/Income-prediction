@@ -124,24 +124,7 @@ def get_preprocessor_and_models(train_df: pd.DataFrame | None = None):
 
 def main():
     """Main Streamlit application"""
-    
-    # Sidebar navigation
-    st.sidebar.title("📊 Navigation")
-    page = st.sidebar.radio(
-        "Select Page",
-        ["Home", "Data Exploration", "EDA & Visualization", "Make Prediction", "Model Evaluation"]
-    )
-    
-    if page == "Home":
-        show_home_page()
-    elif page == "Data Exploration":
-        show_data_exploration()
-    elif page == "EDA & Visualization":
-        show_eda_page()
-    elif page == "Make Prediction":
-        show_prediction_page()
-    elif page == "Model Evaluation":
-        show_model_info()
+    show_model_info()
 
 
 def show_home_page():
@@ -415,8 +398,18 @@ def show_prediction_page():
 
 def show_model_info():
     """Display model evaluation page"""
-    st.title("✅ Model Evaluation")
+    st.title("✅ Model Evaluation - Assignment Requirements")
     st.markdown("---")
+
+    st.subheader("Required Items")
+    st.markdown(
+        """
+        - Dataset upload option (CSV)
+        - Model selection dropdown
+        - Display of evaluation metrics
+        - Classification report or confusion matrix
+        """
+    )
 
     st.subheader("Dataset Upload (CSV)")
     st.caption("Upload test data only (CSV format). The file should include an 'income' column.")
