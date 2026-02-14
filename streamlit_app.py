@@ -61,6 +61,25 @@ MODEL_CHOICES = {
 }
 
 
+def normalize_dataset(df: pd.DataFrame) -> pd.DataFrame:
+    """Normalize column names and clean string fields"""
+    cleaned = df.copy()
+    cleaned.columns = [str(col).strip() for col in cleaned.columns]
+
+    if cleaned.shape[1] == len(COLUMN_NAMES):
+        if cleaned.columns.tolist() != COLUMN_NAMES:
+            cleaned.columns = COLUMN_NAMES
+
+    for col in cleaned.columns:
+        if cleaned[col].dtype == object:
+            cleaned[col] = cleaned[col].astype(str).str.strip()
+
+    if 'income' in cleaned.columns:
+        cleaned['income'] = cleaned['income'].str.replace('.', '', regex=False)
+
+    return cleaned
+
+
 @st.cache_resource
 def load_data_cached():
     """Load data with caching"""
@@ -85,7 +104,7 @@ def get_preprocessor_and_models(train_df: pd.DataFrame | None = None):
         loader = AdultIncomeDataLoader(data_path="Input")
         train_data = loader.load_training_data()
     else:
-        train_data = train_df.copy()
+        train_data = normalize_dataset(train_df)
 
     preprocessor = DataPreprocessor()
     train_processed = preprocessor.preprocess(train_data, fit=True)
@@ -416,8 +435,7 @@ def show_model_info():
         st.error(f"Failed to read CSV: {str(e)}")
         return
 
-    if 'income' not in raw_df.columns and raw_df.shape[1] == len(COLUMN_NAMES):
-        raw_df.columns = COLUMN_NAMES
+    raw_df = normalize_dataset(raw_df)
 
     if 'income' not in raw_df.columns:
         st.error("The uploaded CSV must include the 'income' column for evaluation metrics.")
