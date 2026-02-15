@@ -12,14 +12,9 @@ A machine learning project to predict whether an individual's income exceeds $50
 - [Project Overview](#project-overview)
 - [Dataset Description](#dataset-description)
 - [Project Structure](#project-structure)
-- [Installation](#installation)
-- [Usage](#usage)
 - [Methodology](#methodology)
 - [Results](#results)
-- [Key Features](#key-features)
 - [Model Performance](#model-performance)
-- [Future Enhancements](#future-enhancements)
-- [Contributing](#contributing)
 
 ---
 
@@ -92,95 +87,6 @@ adult-income-prediction/
 
 ---
 
-## Installation
-
-### Prerequisites
-- Python 3.8 or higher
-- pip package manager
-- Git
-
-### Setup Instructions
-
-1. **Clone the Repository**
-```bash
-git clone https://github.com/yourusername/adult-income-prediction.git
-cd adult-income-prediction
-```
-
-2. **Create Virtual Environment (Recommended)**
-```bash
-# On Windows
-python -m venv venv
-venv\Scripts\activate
-
-# On macOS/Linux
-python3 -m venv venv
-source venv/bin/activate
-```
-
-3. **Install Dependencies**
-```bash
-pip install -r requirements.txt
-```
-
-4. **Prepare Data**
-- Place the data files in the `Input/` directory
-- Ensure files: `adult.data.txt`, `adult.test.txt`, `adult.names.txt`, `adult.csv`
-
----
-
-## Usage
-
-### 1. Run the Complete Pipeline
-
-Execute the main ML pipeline:
-```bash
-python main.py
-```
-
-This will:
-- Load and explore the dataset
-- Preprocess data (handle missing values, encode features)
-- Train multiple classification models
-- Evaluate model performance
-- Select and save the best model
-
-### 2. Launch Interactive Web Interface
-
-Start the Streamlit dashboard:
-```bash
-streamlit run streamlit_app.py
-```
-
-Features:
-- Dataset exploration and visualization
-- Real-time prediction interface
-- Model performance metrics
-- Feature importance analysis
-
-### 3. Use Individual Modules
-
-```python
-from data_loader import AdultIncomeDataLoader
-from data_preprocessor import DataPreprocessor
-from model_trainer import IncomeClassifierTrainer
-
-# Load data
-loader = AdultIncomeDataLoader(data_path="Input")
-train_data = loader.load_training_data()
-
-# Preprocess
-preprocessor = DataPreprocessor()
-train_processed = preprocessor.preprocess(train_data, fit=True)
-X, y = preprocessor.get_feature_and_target(train_processed)
-
-# Train
-trainer = IncomeClassifierTrainer()
-trainer.split_data(X, y)
-trainer.train_random_forest()
-```
-
----
 
 ## Methodology
 
@@ -276,30 +182,6 @@ n_estimators=100, max_depth=7, learning_rate=0.1, eval_metric='logloss'
 
 ---
 
-## Key Features
-
-### Code Quality
-✅ **Object-Oriented Design:** Modular classes for data, preprocessing, and models
-✅ **Comprehensive Documentation:** Docstrings and comments throughout
-✅ **Error Handling:** Robust handling of edge cases and data issues
-✅ **Reproducibility:** Fixed random seeds for consistent results
-
-### Data Handling
-✅ **Missing Value Management:** Intelligent imputation strategies
-✅ **Feature Encoding:** Proper categorical encoding without data leakage
-✅ **Data Validation:** Verification of data integrity
-
-### Model Development
-✅ **Multiple Models:** Comparison of different algorithms
-✅ **Cross-Validation:** Robust performance estimation
-✅ **Model Persistence:** Save/load trained models
-
-### User Interface
-✅ **Streamlit Dashboard:** Interactive web-based interface
-✅ **Visualization:** Plot distributions and model metrics
-✅ **Real-time Predictions:** Make predictions on new data
-
----
 
 ## Model Performance
 
@@ -316,52 +198,9 @@ Weighted avg       0.87    0.87      0.87      6513
 
 ---
 
-## Future Enhancements
-
-### Short-term Improvements
-- [ ] Implement feature scaling (StandardScaler, MinMaxScaler)
-- [ ] Add hyperparameter tuning with GridSearchCV
-- [ ] Implement ensemble methods (Gradient Boosting, XGBoost)
-- [ ] Handle class imbalance (SMOTE, class weights)
-
-### Medium-term Enhancements
-- [ ] Deep Learning models (Neural Networks)
-- [ ] Feature selection techniques (SelectKBest, RFE)
-- [ ] Model interpretability (SHAP values, LIME)
-- [ ] Automated ML pipeline (AutoML)
-
-### Long-term Goals
-- [ ] Deployment as REST API
-- [ ] Multi-language support
-- [ ] Advanced visualizations
-- [ ] Real-time model monitoring
-- [ ] A/B testing framework
-
----
-
-## Contributing
-
-Contributions are welcome! Please follow these guidelines:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
----
-
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-## References
-
-- UCI Machine Learning Repository: [Adult Dataset](https://archive.ics.uci.edu/ml/datasets/adult)
-- Kohavi, R. (1996). Scaling Up the Accuracy of Naive-Bayes Classifiers: a Decision-Tree Hybrid. *Proceedings of the Second International Conference on Knowledge Discovery and Data Mining*
-- Scikit-learn Documentation: [https://scikit-learn.org](https://scikit-learn.org)
 
 ---
 
@@ -371,14 +210,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 M.Tech Student - Machine Learning  
 Email: admin@pansoftservices.com  
 Student ID: 2025ab05188
-
----
-
-## Acknowledgments
-
-- UCI Machine Learning Repository for the dataset
-- Scikit-learn community for excellent ML tools
-- Project supervisors and peers for valuable feedback
 
 ---
 
